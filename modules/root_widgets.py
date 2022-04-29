@@ -1,18 +1,17 @@
-from tkinter import Label, Radiobutton
+from tkinter import RAISED, SUNKEN, Entry, Frame, Label, Radiobutton, Button, font, Listbox
 from tkinter.ttk import LabelFrame, Combobox
-
 
 class RootWidget:
     
-    def grid(self, row, column):
-        self.widget.grid(row=row, column=column)
+    def grid(self, *args, **kwargs):
+        self.widget.grid(*args, **kwargs)
 
 
 class RootWelcomeLabel(RootWidget):
     
     def __init__(self, root):
         self.root = root
-        self.widget = Label(root, text="TypeFast!")
+        self.widget = Label(root, text="TypeFast!", font=(32))
         
         
 class SettingsFrame(RootWidget):
@@ -54,4 +53,30 @@ class SettingsFrame(RootWidget):
         
         
         
+class MiddleFrame(RootWidget):
+    
+    def __init__(self, root, onclick):
+        self.root = root
         
+        self.widget = Frame(root, relief=RAISED, bd=1)
+        
+        self.label = Label(self.widget, text="Name:", font=(24))
+        self.label.grid(row=0, column=0, sticky="NW")
+        
+        self.entry = Entry(self.widget, font=(24))
+        self.entry.grid(row=1, column=0, pady=(0, 125), sticky="NW")
+        
+        self.button = Button(self.widget, command=onclick, text="Start", font=(24), width=10, height=2)
+        self.button.grid(row=2, column=0, sticky='S')
+    
+    
+    
+class HighscoreFrame(RootWidget):
+    
+    def __init__(self, root):
+        
+        self.root = root
+        self.widget = LabelFrame(root, text="Highscores")
+        
+        self.listbox = Listbox(self.widget, width=45, height=15)
+        self.listbox.grid(row=0, column=0, sticky='NS')
