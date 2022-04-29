@@ -1,0 +1,2 @@
+15.25 - Rick - SampleText228 - True
+16.33 - Mary - SampleText322 - False
