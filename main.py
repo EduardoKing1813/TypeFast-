@@ -1,4 +1,6 @@
+
 from tkinter import *
+from modules.highscore import Highscore
 from modules.root_widgets import HighscoreFrame, RootWelcomeLabel, SettingsFrame, MiddleFrame
 
 
@@ -25,6 +27,10 @@ def main():
     highscore_frame = HighscoreFrame(root)
     highscore_frame.grid(row=1, column=2, sticky='NS')
     
+    
+    highscores = Highscore.load()
+    for item in highscores:
+        print(item)
     
     #Main loop
     root.mainloop()

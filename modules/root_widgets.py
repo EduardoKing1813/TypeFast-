@@ -1,5 +1,7 @@
-from tkinter import RAISED, SUNKEN, Entry, Frame, Label, Radiobutton, Button, font, Listbox
+from cProfile import label
+from tkinter import RAISED, Entry, Frame, Label, Radiobutton, Button, Listbox, StringVar
 from tkinter.ttk import LabelFrame, Combobox
+from .highscore import Highscore
 
 class RootWidget:
     
@@ -78,5 +80,10 @@ class HighscoreFrame(RootWidget):
         self.root = root
         self.widget = LabelFrame(root, text="Highscores")
         
-        self.listbox = Listbox(self.widget, width=45, height=15)
+        highscores = Highscore.load()
+        highscores.sort(key=lambda x: x.time)
+        for index, item in enumerate(highscores):
+            highscores[index] = f'{index+1} - '+item.__repr__()
+        
+        self.listbox = Listbox(self.widget, listvariable=StringVar(value=highscores), width=45, height=15)
         self.listbox.grid(row=0, column=0, sticky='NS')
